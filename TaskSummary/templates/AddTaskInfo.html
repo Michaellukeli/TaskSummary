@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddTackInfo</title>
+</head>
+<body>
+    <form action="" method="get">
+        客户：<input type="text" name="customer">
+        项目类型：<select id="ProType" onchange="TaskType();">
+                    <option value="">项目类型</option>
+                    <option value="售前">售前</option>
+                    <option value="售后">售后</option>
+                    <option value="其他">其他</option>
+                  </select>
+        任务类型：<select id="TaskTypes"></select>
+        <script>
+            var first_postType = {};
+            first_postType['售前'] = ['售前支持', '其他支持'];
+            first_postType['售后'] = ['实施任务', '运维任务', '故障处理', '系统巡检', '其他售后'];
+            first_postType['其他'] = ['其他任务'];
+
+            function TaskType() {
+                var protype = document.getElementById("ProType");
+                var tasktype = document.getElementById("TaskTypes");
+                var selected_Con = protype.options[protype.selectedIndex].value;
+                while(tasktype.options.length){
+                    tasktype.remove(0);
+                }
+
+            var tasktype_list = first_postType[selected_Con];
+            if(tasktype_list){
+                 for(var i = 0; i < tasktype_list.length; i++){
+                     var item = new Option(tasktype_list[i], i);
+                     tasktype.options.add(item);
+                 }
+               }
+            }
+        </script>
+    </form>
+</body>
+</html>
